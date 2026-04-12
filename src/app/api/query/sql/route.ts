@@ -12,6 +12,7 @@ export async function POST(req: Request) {
     const payload: ToSqlResponse = result;
     return NextResponse.json(payload);
   } catch (err) {
+    console.error('[toSql]', err);
     return NextResponse.json(
       { error: 'Failed to generate SQL', detail: (err as Error).message },
       { status: 400 },

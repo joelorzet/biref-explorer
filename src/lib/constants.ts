@@ -1,6 +1,8 @@
-/* eslint-disable @typescript-eslint/no-require-imports */
-const { version } = require('@biref/scanner/package.json') as {
-  version: string;
-};
+import pkg from '../../package.json';
 
-export const SCANNER_VERSION: string = version;
+const deps = pkg.dependencies as Record<string, string>;
+
+export const SCANNER_VERSION: string = deps['@biref/scanner'].replace(
+  /^\^|~|>=?/,
+  '',
+);

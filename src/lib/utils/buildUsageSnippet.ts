@@ -51,11 +51,7 @@ export function buildUsageSnippet(model: DataModelDTO): string {
       lines.push(``, ...secWhere);
     }
 
-    const secInclude = includeBlock(
-      secondary.namespace,
-      secondary,
-      model,
-    );
+    const secInclude = includeBlock(secondary.namespace, secondary, model);
     if (secInclude.length) {
       lines.push(``, ...secInclude);
     }
@@ -124,8 +120,7 @@ function whereBlock(ns: string, e: EntityDTO): string[] {
 
   const filterable = e.fields.find(
     (f) =>
-      !f.isIdentifier &&
-      (f.category === 'boolean' || f.category === 'string'),
+      !f.isIdentifier && (f.category === 'boolean' || f.category === 'string'),
   );
   if (filterable) {
     const val =
@@ -145,11 +140,7 @@ function whereBlock(ns: string, e: EntityDTO): string[] {
   return lines;
 }
 
-function includeBlock(
-  ns: string,
-  e: EntityDTO,
-  model: DataModelDTO,
-): string[] {
+function includeBlock(ns: string, e: EntityDTO, model: DataModelDTO): string[] {
   const rels = e.relationships.slice(0, 2);
   if (!rels.length) {
     return [];
@@ -162,10 +153,7 @@ function includeBlock(
   return multiInclude(ns, e, rels, model);
 }
 
-function buildIncludeCallback(
-  rel: RelationDTO,
-  model: DataModelDTO,
-): string {
+function buildIncludeCallback(rel: RelationDTO, model: DataModelDTO): string {
   const target = findEntity(model, rel.to.namespace, rel.to.name);
   if (!target) {
     return `(r) => r.limit(5)`;
@@ -216,11 +204,7 @@ function multiInclude(
   ];
 }
 
-function comboBlock(
-  ns: string,
-  e: EntityDTO,
-  model: DataModelDTO,
-): string[] {
+function comboBlock(ns: string, e: EntityDTO, model: DataModelDTO): string[] {
   const id = e.fields.find((f) => f.isIdentifier);
   const rel = e.relationships[0];
   const cols = e.fields.slice(0, 3).map((f) => f.name);
@@ -247,8 +231,7 @@ function findEntity(
   name: string,
 ): EntityDTO | null {
   return (
-    model.entities.find((e) => e.namespace === ns && e.name === name) ??
-    null
+    model.entities.find((e) => e.namespace === ns && e.name === name) ?? null
   );
 }
 
@@ -282,9 +265,15 @@ function sampleValue(field: EntityDTO['fields'][number]): string {
 }
 
 function sampleStringValue(fieldName: string): string {
-  if (fieldName.includes('email')) return 'user@example.com';
-  if (fieldName.includes('name')) return 'John';
-  if (fieldName.includes('status')) return 'active';
+  if (fieldName.includes('email')) {
+    return 'user@example.com';
+  }
+  if (fieldName.includes('name')) {
+    return 'John';
+  }
+  if (fieldName.includes('status')) {
+    return 'active';
+  }
   return 'value';
 }
 

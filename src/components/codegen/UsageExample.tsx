@@ -1,7 +1,7 @@
 'use client';
 
-import { useCallback, useState } from 'react';
 import type { DataModelDTO } from '@shared/api';
+import { useCallback, useState } from 'react';
 import { buildUsageSnippet } from '@/lib/utils/buildUsageSnippet';
 import { IconChevronDown, IconChevronRight, IconRefresh } from '../icons';
 import { UsageEditor } from './UsageEditor';

@@ -1,12 +1,12 @@
 'use client';
 
-import { useCallback, useEffect, useRef } from 'react';
 import Editor, { type Monaco, useMonaco } from '@monaco-editor/react';
 import type { editor } from 'monaco-editor';
+import { useCallback, useEffect, useRef } from 'react';
 import {
-  THEME_ID,
   configureTypeScript,
   defineTheme,
+  THEME_ID,
 } from '@/lib/utils/monacoSetup';
 
 interface Props {
@@ -27,24 +27,25 @@ export function UsageEditor({ value, schemaTs, scannerDts, onChange }: Props) {
       defineTheme(m);
       configureTypeScript(m, schemaTs, scannerDts);
     },
-    [schemaTs],
+    [schemaTs, scannerDts],
   );
 
-  const handleMount = useCallback(
-    (ed: editor.IStandaloneCodeEditor) => {
-      editorRef.current = ed;
-    },
-    [],
-  );
+  const handleMount = useCallback((ed: editor.IStandaloneCodeEditor) => {
+    editorRef.current = ed;
+  }, []);
 
   useEffect(() => {
-    if (!monaco) return;
+    if (!monaco) {
+      return;
+    }
     configureTypeScript(monaco, schemaTs, scannerDts);
   }, [monaco, schemaTs, scannerDts]);
 
   useEffect(() => {
     const ed = editorRef.current;
-    if (!ed) return;
+    if (!ed) {
+      return;
+    }
     const model = ed.getModel();
     if (model && model.getValue() !== value) {
       model.setValue(value);

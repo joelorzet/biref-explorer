@@ -73,7 +73,9 @@ const PG_STUB = [
 const disposables: { dispose(): void }[] = [];
 
 function disposeAll() {
-  for (const d of disposables) d.dispose();
+  for (const d of disposables) {
+    d.dispose();
+  }
   disposables.length = 0;
 }
 
@@ -120,9 +122,7 @@ export function configureTypeScript(
   const pgPath = 'file:///node_modules/pg/index.d.ts';
 
   disposables.push(ts.typescriptDefaults.addExtraLib(cleaned, schemaPath));
-  disposables.push(
-    ts.typescriptDefaults.addExtraLib(scannerDts, scannerPath),
-  );
+  disposables.push(ts.typescriptDefaults.addExtraLib(scannerDts, scannerPath));
   disposables.push(ts.typescriptDefaults.addExtraLib(PG_STUB, pgPath));
 
   ensureModel(monaco, schemaPath, cleaned);

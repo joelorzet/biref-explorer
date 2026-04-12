@@ -6,6 +6,7 @@ import { type ConnectionMode, ConnectionModeTabs } from './ConnectionModeTabs';
 import type { FieldErrors } from './connectionSchema';
 import { DriverSelector } from './DriverSelector';
 import { FieldsForm } from './FieldsForm';
+import { SslToggle } from './SslToggle';
 import { UrlForm } from './UrlForm';
 
 interface Props {
@@ -74,6 +75,13 @@ export function ConnectionForm({
       ) : (
         <FieldsForm form={form} errors={fieldErrors} onChange={onFieldChange} />
       )}
+
+      <div className="mt-4">
+        <SslToggle
+          value={form.ssl ?? false}
+          onChange={(next) => onFieldChange('ssl', next)}
+        />
+      </div>
 
       {error && (
         <div className="mt-4 rounded-lg border border-brand-rose/40 bg-brand-rose/10 p-3 text-xs text-brand-rose font-mono">

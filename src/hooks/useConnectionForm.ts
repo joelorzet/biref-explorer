@@ -33,6 +33,7 @@ const defaultForm = (driver: DriverId): ConnectBody => ({
   user: '',
   password: '',
   database: '',
+  ssl: false,
 });
 
 export function useConnectionForm(): ConnectionFormBinding {

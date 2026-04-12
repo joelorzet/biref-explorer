@@ -1,4 +1,6 @@
 import 'server-only';
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
 import { generateSchema } from '@biref/scanner';
 import type { CodegenResponse, QueryBody, ScanResponse } from '@shared/api';
 import { toJsonSafe } from '@/lib/utils/jsonSafe';
@@ -9,6 +11,20 @@ import type {
   ISessionStore,
   QueryResult,
 } from './types';
+
+const SCANNER_DTS_PATH = join(
+  process.cwd(),
+  'node_modules/@biref/scanner/dist/index.d.ts',
+);
+
+let cachedScannerDts: string | null = null;
+
+function getScannerDts(): string {
+  if (!cachedScannerDts) {
+    cachedScannerDts = readFileSync(SCANNER_DTS_PATH, 'utf-8');
+  }
+  return cachedScannerDts;
+}
 
 /**
  * Server-side orchestration for the @biref/scanner SDK. Pulls an
@@ -49,6 +65,7 @@ export class BirefScannerService implements IBirefScannerService {
     session.model = model;
     return {
       schemaTs: generateSchema(model),
+      scannerDts: getScannerDts(),
       entityCount: model.entities.length,
       elapsedMs: Math.round(performance.now() - started),
     };

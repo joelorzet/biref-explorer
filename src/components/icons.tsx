@@ -18,6 +18,7 @@ export {
   Loading01 as IconSpinner,
   Minus as IconMinus,
   Play as IconPlay,
+  RefreshCcw01 as IconRefresh,
   Plus as IconPlus,
   Scan as IconScan,
   SearchMd as IconSearch,

@@ -16,7 +16,7 @@ interface Props {
 
 export function ExplorerContent({ tab, sessionId, model, entity }: Props) {
   if (tab === 'codegen') {
-    return <CodegenView sessionId={sessionId} />;
+    return <CodegenView sessionId={sessionId} model={model} />;
   }
   if (!entity) {
     return <ExplorerEmptyState />;

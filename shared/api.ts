@@ -103,6 +103,7 @@ export interface ScanResponse {
 
 export interface CodegenResponse {
   schemaTs: string;
+  scannerDts: string;
   entityCount: number;
   elapsedMs: number;
 }

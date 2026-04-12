@@ -15,7 +15,7 @@ export function SyntaxBlock({ code }: Props) {
         <tbody>
           {lines.map((line, i) => (
             <tr key={`${i}-${line}`} className="align-top">
-              <td className="sticky left-0 select-none border-r border-border bg-bg-elevated/60 px-3 py-0.5 text-right text-[11px] text-ink-dim">
+              <td className="sticky left-0 w-12 min-w-12 select-none border-r border-border bg-bg-elevated/60 px-3 py-0.5 text-right text-[11px] text-ink-dim">
                 {i + 1}
               </td>
               <td className="px-4 py-0.5 whitespace-pre text-ink">

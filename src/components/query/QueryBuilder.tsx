@@ -7,6 +7,7 @@ import { IncludeList } from './IncludeList';
 import { QueryResultView } from './QueryResultView';
 import { QueryToolbar } from './QueryToolbar';
 import { SelectChips } from './SelectChips';
+import { SqlPreview } from './SqlPreview';
 import { WhereList } from './WhereList';
 
 interface Props {
@@ -17,7 +18,16 @@ interface Props {
 
 export function QueryBuilder({ sessionId, model, entity }: Props) {
   const { state, update, toggleSelect } = useQueryState();
-  const { result, running, error, run } = useQueryRunner({ sessionId, entity });
+  const {
+    result,
+    running,
+    error,
+    run,
+    sqlResult,
+    sqlLoading,
+    sqlError,
+    toSql,
+  } = useQueryRunner({ sessionId, entity });
 
   return (
     <div className="flex flex-col gap-4 animate-fade-in">
@@ -26,9 +36,11 @@ export function QueryBuilder({ sessionId, model, entity }: Props) {
           mode={state.mode}
           limit={state.limit}
           running={running}
+          sqlLoading={sqlLoading}
           onModeChange={(m) => update({ mode: m })}
           onLimitChange={(l) => update({ limit: l })}
           onRun={() => run(state)}
+          onToSql={() => toSql(state)}
         />
       </div>
 
@@ -60,6 +72,16 @@ export function QueryBuilder({ sessionId, model, entity }: Props) {
           onChange={(next) => update({ includes: next })}
         />
       </div>
+
+      {sqlError && (
+        <div className="panel p-5 text-xs text-brand-rose">{sqlError}</div>
+      )}
+      {sqlResult && (
+        <SqlPreview
+          queries={sqlResult.queries}
+          elapsedMs={sqlResult.elapsedMs}
+        />
+      )}
 
       <QueryResultView result={result} error={error} running={running} />
     </div>

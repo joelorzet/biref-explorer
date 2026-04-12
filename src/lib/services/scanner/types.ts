@@ -5,6 +5,7 @@ import type {
   QueryBody,
   QueryResponse,
   ScanResponse,
+  ToSqlResponse,
 } from '@shared/api';
 
 export type Namespaces = 'all' | readonly string[];
@@ -15,4 +16,5 @@ export interface IDbScannerService {
   scan(sessionId: string, namespaces?: Namespaces): Promise<ScanResponse>;
   codegen(sessionId: string, namespaces?: Namespaces): Promise<CodegenResponse>;
   query(body: QueryBody): Promise<QueryResponse>;
+  toSql(body: QueryBody): Promise<ToSqlResponse>;
 }

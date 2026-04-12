@@ -5,6 +5,7 @@ import type {
   QueryBody,
   QueryResponse,
   ScanResponse,
+  ToSqlResponse,
 } from '@shared/api';
 import type { IApiClient } from '../http/types';
 import type { IDbScannerService, Namespaces } from './types';
@@ -47,5 +48,9 @@ export class DbScannerService implements IDbScannerService {
 
   query(body: QueryBody): Promise<QueryResponse> {
     return this.http.post<QueryResponse>('/api/query', body);
+  }
+
+  toSql(body: QueryBody): Promise<ToSqlResponse> {
+    return this.http.post<ToSqlResponse>('/api/query/sql', body);
   }
 }

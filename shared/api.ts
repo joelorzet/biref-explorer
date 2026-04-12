@@ -153,6 +153,18 @@ export interface QueryResponse {
   sql?: string;
 }
 
+export interface ExplainedQueryDTO {
+  entity: string;
+  sql: string;
+  params: readonly unknown[];
+  includes: readonly ExplainedQueryDTO[];
+}
+
+export interface ToSqlResponse {
+  queries: ExplainedQueryDTO;
+  elapsedMs: number;
+}
+
 export interface ApiError {
   error: string;
   detail?: string;

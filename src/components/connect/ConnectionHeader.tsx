@@ -1,6 +1,14 @@
-import { IconDatabase } from '../icons';
+'use client';
+
+import { useGithubStars } from '@/hooks/useGithubStars';
+import { SCANNER_VERSION } from '@/lib/constants';
+import { IconBranch, IconDatabase } from '../icons';
+
+const REPO_URL = 'https://github.com/joelorzet/biref-db-scanner';
 
 export function ConnectionHeader() {
+  const stars = useGithubStars();
+
   return (
     <header className="relative z-10 flex items-center justify-between px-8 py-6">
       <div className="flex items-center gap-3">
@@ -12,17 +20,19 @@ export function ConnectionHeader() {
             Biref Explorer
           </div>
           <div className="text-[11px] font-mono text-ink-dim">
-            @biref/scanner · v0.0.2
+            @biref/scanner · v{SCANNER_VERSION}
           </div>
         </div>
       </div>
       <a
-        href="https://github.com/joelorzet/biref-db-scanner"
+        href={REPO_URL}
         target="_blank"
         rel="noreferrer"
-        className="text-xs text-ink-muted hover:text-ink transition-colors"
+        className="flex items-center gap-1.5 text-xs text-ink-muted transition-colors hover:text-ink"
       >
-        github
+        <IconBranch className="h-3.5 w-3.5" />
+        {stars !== null && <span className="font-mono text-ink">{stars}</span>}
+        GitHub
       </a>
     </header>
   );

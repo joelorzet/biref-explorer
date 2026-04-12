@@ -45,11 +45,17 @@ function isStaleContainer(
     return true;
   }
   // Dev-mode HMR can leave a cached container built by an older
-  // version of this module, missing fields we added since. Treat
-  // any partial shape as stale so a fresh container gets built.
-  return REQUIRED_KEYS.some(
-    (key) => (container as unknown as Record<string, unknown>)[key] == null,
-  );
+  // version of this module, missing fields or methods we added since.
+  // Treat any partial shape as stale so a fresh container gets built.
+  if (
+    REQUIRED_KEYS.some(
+      (key) => (container as unknown as Record<string, unknown>)[key] == null,
+    )
+  ) {
+    return true;
+  }
+  // Check that the scanner service has the latest methods
+  return typeof (container.birefScanner as any).toSql !== 'function';
 }
 
 export function getServerContainer(): ServerContainer {

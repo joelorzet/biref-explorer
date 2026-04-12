@@ -5,7 +5,7 @@ import { SileoToaster } from '@/components/SileoToaster';
 export const metadata: Metadata = {
   title: 'Biref Explorer: Database scanner UI',
   description:
-    'Scan any Postgres database, inspect relationships in both directions, and build typed queries with @biref/scanner.',
+    'Scan any database, inspect relationships in both directions, and build typed queries with @biref/scanner.',
 };
 
 export default function RootLayout({

@@ -25,7 +25,7 @@ export async function POST(req: Request) {
     const result = await sessionStore.create({
       driver,
       host: body.host,
-      port: body.port ?? 5432,
+      port: body.port ?? (driver === 'mysql' ? 3306 : 5432),
       user: body.user,
       password: body.password,
       database: body.database,

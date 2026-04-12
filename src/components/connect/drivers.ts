@@ -23,7 +23,7 @@ export const DRIVERS: DriverDescriptor[] = [
     label: 'MySQL',
     scheme: 'mysql',
     defaultPort: 3306,
-    available: false,
+    available: true,
     placeholder: 'mysql://user:password@localhost:3306/mydb',
   },
   {

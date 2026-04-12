@@ -61,7 +61,7 @@ export function Explorer() {
           <div className="flex min-w-0 flex-1 flex-col">
             <TabSwitcher active={tab} onChange={setTab} />
             <div className="flex-1 overflow-y-auto p-6">
-              <div className="mx-auto max-w-5xl">
+              <div className="mx-auto h-full">
                 <ExplorerContent
                   tab={tab}
                   sessionId={session.session.sessionId}

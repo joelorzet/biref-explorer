@@ -19,6 +19,7 @@ export {
   Minus as IconMinus,
   Play as IconPlay,
   Plus as IconPlus,
+  RefreshCcw01 as IconRefresh,
   Scan as IconScan,
   SearchMd as IconSearch,
   Table as IconTable,

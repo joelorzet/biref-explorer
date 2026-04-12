@@ -64,7 +64,13 @@ export function useConnectionSubmit({
         setParseError(parsed.error ?? 'Invalid connection string');
         return null;
       }
-      const validation = await validateFields(parsed.value);
+      // Toggle wins over anything the parser sniffed from the URL:
+      // the user explicitly opted in or out via the SSL switch.
+      const merged: ConnectBody = {
+        ...parsed.value,
+        ssl: binding.form.ssl || parsed.value.ssl || false,
+      };
+      const validation = await validateFields(merged);
       if (!validation.ok) {
         setParseError(Object.values(validation.errors)[0] ?? 'Invalid URL');
         return null;

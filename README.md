@@ -19,8 +19,6 @@ hit Connect. Biref opens one server-side connection, walks the entire
 schema, and hands you the full model: every entity, every column,
 every index, and every foreign key, resolved in both directions.
 
-![Connection flow placeholder](./docs/connect.png)
-
 ### Browse your schema visually
 
 A filterable sidebar groups every table by namespace. Click one and
@@ -32,8 +30,6 @@ you get:
 - **Inbound** relationships (the foreign keys that point at this
   table). This is the thing most schema tools silently miss.
 - Indexes and constraints.
-
-![Schema explorer placeholder](./docs/schema.png)
 
 ### Build queries by clicking
 
@@ -47,8 +43,6 @@ model, so you can only pick things that actually exist.
 - Nested includes as deep as your schema goes
 - Add individual relations or `* all` of them at once
 
-![Query builder placeholder](./docs/query-builder.png)
-
 ### Read results in a real JSON viewer
 
 Results come back in a collapsible JSON tree:
@@ -60,8 +54,6 @@ Results come back in a collapsible JSON tree:
 - Safe with `bigint`, `Date`, `Buffer`, and other Postgres types
   that `JSON.stringify` would normally choke on.
 
-![Result viewer placeholder](./docs/results.png)
-
 ### Ship a typed schema file
 
 Switch to the Codegen tab and the scanner generates a
@@ -71,8 +63,6 @@ full editor autocomplete and return-type narrowing based on the live
 database.
 
 Copy it to your clipboard or download it straight from the UI.
-
-![Codegen placeholder](./docs/codegen.png)
 
 ### Stay in the loop
 

@@ -18,8 +18,8 @@ export function parseConnectionString(
 
   const descriptor = driverById(driver);
   try {
-    // URL rejects postgres:// without a slash in the path. Normalize by
-    // swapping to a scheme WHATWG URL understands, then map back.
+    // Normalize the scheme to http:// so WHATWG URL can parse it,
+    // then extract the individual parts.
     const normalized = trimmed.replace(
       /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//,
       'http://',
@@ -27,7 +27,7 @@ export function parseConnectionString(
     const url = new URL(normalized);
 
     const host = url.hostname || 'localhost';
-    const port = url.port ? Number(url.port) : descriptor.defaultPort || 5432;
+    const port = url.port ? Number(url.port) : descriptor.defaultPort;
     const user = decodeURIComponent(url.username || '');
     const password = decodeURIComponent(url.password || '');
     const database = url.pathname.replace(/^\//, '');

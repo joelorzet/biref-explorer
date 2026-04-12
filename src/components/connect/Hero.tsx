@@ -7,7 +7,7 @@ export function Hero() {
         <IconScan className="h-3 w-3" /> live database introspection
       </div>
       <h1 className="max-w-3xl font-sans text-4xl font-semibold leading-tight tracking-tight md:text-5xl">
-        Scan any Postgres,{' '}
+        Scan any database,{' '}
         <span className="bg-gradient-to-r from-accent to-brand-cyan bg-clip-text text-transparent">
           query with types
         </span>{' '}

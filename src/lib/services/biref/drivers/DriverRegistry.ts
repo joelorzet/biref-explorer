@@ -1,5 +1,6 @@
 import 'server-only';
 import type { DriverId } from '@shared/api';
+import { MySQLDriverStrategy } from './MySQLDriverStrategy';
 import { PostgresDriverStrategy } from './PostgresDriverStrategy';
 import type { DriverStrategy } from './types';
 
@@ -44,5 +45,6 @@ export class DriverRegistry {
 export function buildDefaultDriverRegistry(): DriverRegistry {
   const registry = new DriverRegistry();
   registry.register(new PostgresDriverStrategy());
+  registry.register(new MySQLDriverStrategy());
   return registry;
 }

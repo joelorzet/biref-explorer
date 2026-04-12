@@ -7,6 +7,7 @@ import type {
   DriverId,
   QueryBody,
   ScanResponse,
+  ToSqlResponse,
 } from '@shared/api';
 import type { DriverConnection } from './drivers/types';
 
@@ -49,6 +50,7 @@ export interface IBirefScannerService {
     namespaces: 'all' | string[],
   ): Promise<CodegenResponse>;
   query(body: QueryBody): Promise<QueryResult>;
+  toSql(body: QueryBody): ToSqlResponse;
 }
 
 export interface IDataModelMapper {

@@ -2,7 +2,12 @@ import 'server-only';
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { generateSchema } from '@biref/scanner';
-import type { CodegenResponse, QueryBody, ScanResponse } from '@shared/api';
+import type {
+  CodegenResponse,
+  QueryBody,
+  ScanResponse,
+  ToSqlResponse,
+} from '@shared/api';
 import { toJsonSafe } from '@/lib/utils/jsonSafe';
 import { QueryPlanApplier } from './QueryPlanApplier';
 import type {
@@ -72,6 +77,31 @@ export class BirefScannerService implements IBirefScannerService {
   }
 
   async query(body: QueryBody): Promise<QueryResult> {
+    const { session, applied, started } = this.buildChain(body);
+    void session;
+    const rows =
+      body.mode === 'findFirst'
+        ? await applied.findFirst()
+        : await applied.findMany();
+    return {
+      rows: toJsonSafe(rows ?? null),
+      rowCount: Array.isArray(rows) ? rows.length : rows ? 1 : 0,
+      elapsedMs: Math.round(performance.now() - started),
+    };
+  }
+
+  toSql(body: QueryBody): ToSqlResponse {
+    const { session, applied, started } = this.buildChain(body);
+    const { adapters } = session.biref as any;
+    const { engine } = adapters.get(session.driver);
+    const queries = applied.toSQL(engine);
+    return {
+      queries,
+      elapsedMs: Math.round(performance.now() - started),
+    };
+  }
+
+  private buildChain(body: QueryBody) {
     const session = this.sessions.require(body.sessionId);
     if (!session.model) {
       throw new Error('Scan the database first');
@@ -90,14 +120,6 @@ export class BirefScannerService implements IBirefScannerService {
       throw new Error(`Unknown entity ${body.namespace}.${body.entity}`);
     }
     const applied = this.queryApplier.apply(entityChain, body);
-    const rows =
-      body.mode === 'findFirst'
-        ? await applied.findFirst()
-        : await applied.findMany();
-    return {
-      rows: toJsonSafe(rows ?? null),
-      rowCount: Array.isArray(rows) ? rows.length : rows ? 1 : 0,
-      elapsedMs: Math.round(performance.now() - started),
-    };
+    return { session, applied, started };
   }
 }

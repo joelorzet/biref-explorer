@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.29.2",
-    "@biref/scanner": "^0.1.0",
+    "@biref/scanner": "^0.2.0",
     "@monaco-editor/react": "^4.7.0",
     "@untitled-ui/icons-react": "^0.1.4",
     "mysql2": "^3.22.0",

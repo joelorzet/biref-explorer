@@ -1,0 +1,27 @@
+// Central re-export for Untitled UI icons so component code stays
+// decoupled from the icon library.
+export {
+  ArrowLeft as IconArrowLeft,
+  ArrowRight as IconArrowRight,
+  Check as IconCheck,
+  ChevronDown as IconChevronDown,
+  ChevronRight as IconChevronRight,
+  CodeSquare02 as IconCode,
+  Copy01 as IconCopy,
+  Database01 as IconDatabase,
+  Download01 as IconDownload,
+  FilterLines as IconFilter,
+  GitBranch01 as IconBranch,
+  Key01 as IconKey,
+  LayersThree01 as IconLayers,
+  Link01 as IconLink,
+  Loading01 as IconSpinner,
+  Minus as IconMinus,
+  Play as IconPlay,
+  Plus as IconPlus,
+  Scan as IconScan,
+  SearchMd as IconSearch,
+  Table as IconTable,
+  XClose as IconX,
+  Zap as IconZap,
+} from '@untitled-ui/icons-react';

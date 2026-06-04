@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { SileoToaster } from '@/components/SileoToaster';
+import { Analytics } from '@vercel/analytics/next';
 
 const SITE_URL = 'https://biref.xyz';
 const TITLE = 'Biref Explorer: Database scanner UI';
@@ -64,6 +65,7 @@ export default function RootLayout({
       <body className="bg-bg text-ink font-sans antialiased">
         {children}
         <SileoToaster />
+        <Analytics />
       </body>
     </html>
   );

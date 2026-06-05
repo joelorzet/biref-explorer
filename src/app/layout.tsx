@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
-import { SileoToaster } from '@/components/SileoToaster';
 import { Analytics } from '@vercel/analytics/next';
+import { SileoToaster } from '@/components/SileoToaster';
 
 const SITE_URL = 'https://biref.xyz';
 const TITLE = 'Biref Explorer: Database scanner UI';

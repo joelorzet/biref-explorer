@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Analytics } from '@vercel/analytics/next';
 import { SileoToaster } from '@/components/SileoToaster';
 
 const SITE_URL = 'https://biref.xyz';
@@ -64,6 +65,7 @@ export default function RootLayout({
       <body className="bg-bg text-ink font-sans antialiased">
         {children}
         <SileoToaster />
+        <Analytics />
       </body>
     </html>
   );
